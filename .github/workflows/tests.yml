@@ -64,13 +64,13 @@ jobs:
       - name: run tests
         if: matrix.python-version != '3.x' || matrix.os != 'ubuntu-latest'
         run: |
-          source .venv/bin/activate
+          source $VENV
           pip install pytest pytest-xdist
           pytest --numprocesses auto
       - name: run tests with coverage
         if: matrix.python-version == '3.x' && matrix.os == 'ubuntu-latest'
         run: |
-          source .venv/bin/activate
+          source $VENV
           pip install pytest pytest-xdist pytest-cov
           pytest --numprocesses auto --cov ./ --cov-report xml:coverage.xml
       - name: upload coverage to Codecov
