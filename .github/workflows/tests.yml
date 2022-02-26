@@ -65,6 +65,11 @@ jobs:
         run: pytest --numprocesses auto --cov ./ --cov-report xml:coverage.xml
       - name: upload coverage to Codecov
         if: matrix.python-version == '3.x' && matrix.os == 'ubuntu-latest'
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.xml
+          fail_ci_if_error: true
   conda:
     needs: lint
     name: test Anaconda ${{ matrix.python-version }} on ${{ matrix.os }}
