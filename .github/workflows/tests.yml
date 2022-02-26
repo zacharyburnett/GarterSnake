@@ -58,13 +58,20 @@ jobs:
           key: ${{ runner.os }}-python${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: ${{ runner.os }}-python${{ matrix.python-version }}-
       - name: Install dependencies
-        run: poetry install --extras testing
+        run: |
+          poetry install
+          pip install pytest pytest-xdist
+      - name: install `pipwin` on Windows
+        if: contains(matrix.os, 'windows')
+        run: pip install pipwin
       - name: run tests
         if: matrix.python-version != '3.x' && matrix.os != 'ubuntu-latest'
         run: pytest --numprocesses auto
       - name: run tests with coverage
         if: matrix.python-version == '3.x' && matrix.os == 'ubuntu-latest'
-        run: pytest --numprocesses auto --cov ./ --cov-report xml:coverage.xml
+        run: |
+          pip install pytest-cov
+          pytest --numprocesses auto --cov ./ --cov-report xml:coverage.xml
       - name: upload coverage to Codecov
         if: matrix.python-version == '3.x' && matrix.os == 'ubuntu-latest'
         uses: codecov/codecov-action@v2.1.0
