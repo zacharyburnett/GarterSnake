@@ -36,7 +36,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
   pip:
     needs: lint
-    name: test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    name: test Python
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -74,7 +74,7 @@ jobs:
           fail_ci_if_error: true
   conda:
     needs: lint
-    name: test Anaconda ${{ matrix.python-version }} on ${{ matrix.os }}
+    name: test Anaconda
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
