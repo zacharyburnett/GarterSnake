@@ -108,7 +108,11 @@ jobs:
           key: ${{ runner.os }}-conda${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: ${{ runner.os }}-conda${{ matrix.python-version }}-
       - name: install dependencies
-        run: conda install pytest pytest-xdist -y
+        run: |
+          conda activate test
+          conda install pytest pytest-xdist -y
       - name: run tests
-        run: pytest --numprocesses auto
+        run: |
+          conda activaet test
+          pytest --numprocesses auto
 
