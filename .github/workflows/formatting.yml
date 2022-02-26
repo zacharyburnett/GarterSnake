@@ -1,0 +1,23 @@
+name: formatting
+
+on: pull_request
+
+jobs:
+  format:
+    name: format
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone repository
+        uses: actions/checkout@v2
+      - name: install Python
+        uses: actions/setup-python@v2
+      - name: install Poetry
+        uses: abatilo/actions-poetry@v2.1.3
+      - name: install dependencies
+        run: poetry install -extras development
+      - name: run linters / formatters
+        uses: wearerequired/lint-action@master
+        with:
+          oitnb_command_prefix: isort --fss --fass .;
+          oitnb: true
+          auto_fix: true
