@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-python${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}
           restore-keys: ${{ runner.os }}-python${{ matrix.python-version }}-
       - name: install dependencies
-        run: pip install flake8
+        run: pip install ".[development]"
       - name: lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
@@ -45,33 +45,24 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: install Poetry
-        uses: snok/install-poetry@v1.3.1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      - name: load cached virtualenv
-        id: cached-poetry-dependencies
+      - name: load cached `~/.local`
         uses: actions/cache@v2
         with:
-          path: .venv
-          key: ${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}
-      - name: Install dependencies
-        run: poetry install
+          path: ~/.local
+          key: ${{ runner.os }}-python${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}
+          restore-keys: ${{ runner.os }}-python${{ matrix.python-version }}-
+      - name: install dependencies
+        run: pip install ".[testing]"
       - name: install `pipwin` on Windows
         if: contains(matrix.os, 'windows')
         run: pip install pipwin
       - name: run tests
-        run: |
-          source $VENV
-          pip install pytest pytest-xdist
-          pytest --numprocesses auto
+        run: pytest --numprocesses auto
   conda:
     needs: lint
     name: test Anaconda
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest ]
         python-version: [ '3.6', '3.x' ]
@@ -91,14 +82,15 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local
-          key: ${{ runner.os }}-conda${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}
-          restore-keys: ${{ runner.os }}-conda${{ matrix.python-version }}-
+          key: ${{ runner.os }}-conda${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('pyproject.toml') }}
+          restore-keys: ${{ runner.os }}-conda${{ steps.setup-python.outputs.python-version }}-
       - name: install dependencies
         run: |
           conda activate test
           conda install pytest pytest-xdist -y
+          pip install .
       - name: run tests
         run: |
-          conda activaet test
+          conda activate test
           pytest --numprocesses auto
 
