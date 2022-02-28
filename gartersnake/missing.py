@@ -21,7 +21,7 @@ def missing_requirements(requirements: Union[List[str], Dict[str, List[str]]] = 
         missing_packages = missing_requirements(list(requirements))
         missing_dependencies = {}
         for requirement, subrequirements in requirements.items():
-            missing_subpackages = missing_dependencies(subrequirements)
+            missing_subpackages = missing_requirements(subrequirements)
             if requirement in missing_packages or len(missing_subpackages) > 0:
                 missing_dependencies[requirement] = missing_subpackages
         return missing_dependencies
