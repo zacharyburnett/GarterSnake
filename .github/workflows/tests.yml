@@ -76,7 +76,7 @@ jobs:
       - name: setup Miniconda
         uses: conda-incubator/setup-miniconda@v2.1.1
         with:
-          auto-update-conda: true
+          activate-environment: test
           python-version: ${{ steps.setup-python.outputs.python-version }}
       - name: load cached `~/.local`
         uses: actions/cache@v2
@@ -86,11 +86,9 @@ jobs:
           restore-keys: ${{ runner.os }}-conda${{ steps.setup-python.outputs.python-version }}-
       - name: install dependencies
         run: |
-          conda activate test
           conda install pytest pytest-xdist -y
           pip install .
       - name: run tests
         run: |
-          conda activate test
           pytest --numprocesses auto
 
