@@ -1,6 +1,6 @@
-from gartersnake.conda import is_conda
 import pytest
 
+from gartersnake.conda import is_conda
 from gartersnake.pip import installed_packages
 from gartersnake.windows import install_windows_requirements, is_windows
 

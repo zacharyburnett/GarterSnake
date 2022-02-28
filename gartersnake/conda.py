@@ -36,15 +36,17 @@ def install_conda_requirements(requirements: List[str] = None, overwrite: bool =
             non_conda_packages = [
                 package.strip()
                 for package in output[
-                               output.index(package_not_found_start): output.index(
-                                   package_not_found_stop
-                               )
-                               ].splitlines()[2:]
+                    output.index(package_not_found_start) : output.index(
+                        package_not_found_stop
+                    )
+                ].splitlines()[2:]
             ]
             conda_packages = [
                 package
                 for package in missing_packages
-                if not any(non_conda_package in package for non_conda_package in non_conda_packages)
+                if not any(
+                    non_conda_package in package for non_conda_package in non_conda_packages
+                )
             ]
 
             print(

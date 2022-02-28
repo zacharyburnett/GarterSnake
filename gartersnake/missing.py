@@ -13,7 +13,9 @@ def read_requirements() -> List[str]:
     return packages
 
 
-def missing_requirements(requirements: Union[List[str], Dict[str, List[str]]] = None) -> Union[List[str], Dict[str, List[str]]]:
+def missing_requirements(
+    requirements: Union[List[str], Dict[str, List[str]]] = None
+) -> Union[List[str], Dict[str, List[str]]]:
     if requirements is None:
         requirements = read_requirements()
 
@@ -30,5 +32,5 @@ def missing_requirements(requirements: Union[List[str], Dict[str, List[str]]] = 
             required_package
             for required_package in requirements
             if re.split('<|<=|==|>=|>', required_package)[0].lower()
-               not in installed_packages()
+            not in installed_packages()
         ]

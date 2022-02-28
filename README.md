@@ -10,8 +10,9 @@ GarterSnake is a set of functions that helps with using `setuptools` in
 `setup.py`. It includes
 
 - dynamically retrieving version info from VCS with `dunamai`
-- installing packages from [Christoph Gohlke's Windows binaries](https://www.
-  lfd.uci.edu/~gohlke/pythonlibs/) with `pipwin`
+- installing packages
+  from [Christoph Gohlke's Windows binaries](https://www.lfd.uci.edu/~gohlke/pythonlibs/)
+  with `pipwin`
 - installing packages using `conda`
 
 ## Usage
@@ -19,7 +20,9 @@ GarterSnake is a set of functions that helps with using `setuptools` in
 ```python
 from setuptools import find_packages, setup
 
-from gartersnake import install_conda_requirements, install_windows_requirements, is_conda, is_windows, missing_requirements, vcs_version
+from gartersnake import install_conda_requirements,
+    install_windows_requirements, is_conda, is_windows, missing_requirements,
+    vcs_version
 
 REQUIREMENTS = {
     'fiona': ['gdal'],

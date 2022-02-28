@@ -11,7 +11,9 @@ def is_windows() -> bool:
     return os.name == 'nt'
 
 
-def install_windows_requirements(requirements: Union[List[str], Dict[str, List[str]]] = None, overwrite: bool = False):
+def install_windows_requirements(
+    requirements: Union[List[str], Dict[str, List[str]]] = None, overwrite: bool = False
+):
     if not is_windows():
         raise EnvironmentError('Windows environment not detected')
 
@@ -29,7 +31,9 @@ def install_windows_requirements(requirements: Union[List[str], Dict[str, List[s
     print(f'attempting to install {len(missing_packages)} packages with `pipwin`')
 
     if 'pipwin' not in installed_packages():
-        raise ImportError('Windows detected but `pipwin` is not installed. Please install `pipwin` to continue.')
+        raise ImportError(
+            'Windows detected but `pipwin` is not installed. Please install `pipwin` to continue.'
+        )
 
     subprocess.run(f'{sys.executable} -m pipwin refresh', shell=True)
 
@@ -41,7 +45,7 @@ def install_windows_requirements(requirements: Union[List[str], Dict[str, List[s
         for _ in range(1 + len(subrequirements)):
             for package_name in subrequirements + [requirement]:
                 if requirement in missing_requirements(
-                        requirements
+                    requirements
                 ) or package_name in missing_requirements(subrequirements):
                     try:
                         subprocess.run(
