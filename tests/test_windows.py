@@ -1,10 +1,11 @@
+from gartersnake.conda import is_conda
 import pytest
 
 from gartersnake.pip import installed_packages
 from gartersnake.windows import install_windows_requirements, is_windows
 
 
-@pytest.mark.skipif(not is_windows(), reason='requires a Windows environment')
+@pytest.mark.skipif(not is_windows() or is_conda(), reason='requires a Windows environment')
 def test_install_windows_requirements():
     test_packages = ['numpy', 'xarray']
 
