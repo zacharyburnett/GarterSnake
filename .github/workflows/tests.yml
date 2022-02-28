@@ -84,6 +84,5 @@ jobs:
           conda install pytest pytest-xdist -y
           pip install .
       - name: run tests
-        run: |
-          pytest --numprocesses auto
+        run: pytest --numprocesses auto
 
