@@ -1,10 +1,9 @@
 # GarterSnake
 
 [![tests](https://github.com/zacharyburnett/GarterSnake/workflows/tests/badge.svg)](https://github.com/zacharyburnett/GarterSnake/actions?query=workflow%3Atests)
-[![codecov](https://codecov.io/gh/zacharyburnett/GarterSnake/branch/main/graph/badge.svg?token=4DwZePHp18)](https://codecov.io/gh/zacharyburnett/GarterSnake)
 [![build](https://github.com/zacharyburnett/GarterSnake/workflows/build/badge.svg)](https://github.com/zacharyburnett/GarterSnake/actions?query=workflow%3Abuild)
 [![version](https://img.shields.io/pypi/v/GarterSnake)](https://pypi.org/project/GarterSnake)
-[![license](https://img.shields.io/github/license/zacharyburnett/GarterSnake)](https://creativecommons.org/share-your-work/public-domain/cc0)
+[![license](https://img.shields.io/github/license/zacharyburnett/GarterSnake)](https://opensource.org/licenses/MIT)
 [![style](https://sourceforge.net/p/oitnb/code/ci/default/tree/_doc/_static/oitnb.svg?format=raw)](https://sourceforge.net/p/oitnb/code)
 
 GarterSnake is a set of functions that helps with using `setuptools` in
