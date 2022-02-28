@@ -20,8 +20,8 @@ GarterSnake is a set of functions that helps with using `setuptools` in
 ```python
 from setuptools import find_packages, setup
 
-from gartersnake import install_conda_requirements,
-    install_windows_requirements, is_conda, is_windows, missing_requirements,
+from gartersnake import install_conda_requirements, \
+    install_windows_requirements, is_conda, is_windows, missing_requirements, \
     vcs_version
 
 REQUIREMENTS = {
