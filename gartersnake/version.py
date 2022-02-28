@@ -1,18 +1,10 @@
-import subprocess
-import sys
-
 from gartersnake.pip import installed_packages
 
 
 def vcs_version() -> str:
     try:
         if 'dunamai' not in installed_packages():
-            subprocess.run(
-                f'{sys.executable} -m pip install dunamai',
-                shell=True,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
+            print('`dunamai` is not installed; version will default to `0.0.0`')
 
         from dunamai import Version
 
