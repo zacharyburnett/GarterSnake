@@ -34,7 +34,7 @@ def install_conda_requirements(requirements: List[str] = None, overwrite: bool =
         package_not_found_stop = '\n\nCurrent channels:'
         if package_not_found_start in output:
             non_conda_packages = [
-                package.strip()
+                package.strip('-').strip()
                 for package in output[
                     output.index(package_not_found_start) : output.index(
                         package_not_found_stop
