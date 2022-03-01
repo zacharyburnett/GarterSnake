@@ -3,6 +3,7 @@ import subprocess
 import sys
 from typing import Dict, List, Mapping, Union
 
+from gartersnake.dependencies import dependency_tree
 from gartersnake.missing import missing_requirements, read_requirements
 from gartersnake.pip import installed_packages
 
@@ -11,9 +12,7 @@ def is_windows() -> bool:
     return os.name == 'nt'
 
 
-def install_windows_requirements(
-    requirements: Union[List[str], Dict[str, List[str]]] = None, overwrite: bool = False
-):
+def install_windows_requirements(requirements: List[str] = None, overwrite: bool = False):
     if not is_windows():
         raise EnvironmentError('Windows environment not detected')
 
@@ -21,7 +20,7 @@ def install_windows_requirements(
         requirements = read_requirements()
 
     if not isinstance(requirements, Mapping):
-        requirements = {requirement: [] for requirement in requirements}
+        requirements = dependency_tree(*requirements)
 
     if overwrite:
         missing_packages = requirements

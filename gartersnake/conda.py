@@ -11,7 +11,9 @@ def is_conda() -> bool:
     return (Path(sys.prefix) / 'conda-meta').exists()
 
 
-def install_conda_requirements(requirements: List[str] = None, channel: str = None, overwrite: bool = False):
+def install_conda_requirements(
+    requirements: List[str] = None, channel: str = None, overwrite: bool = False
+):
     if channel is None:
         channel = 'conda-forge'
 
@@ -34,9 +36,7 @@ def install_conda_requirements(requirements: List[str] = None, channel: str = No
     non_conda_packages = []
     try:
         subprocess.check_output(
-            conda_install_command,
-            shell=True,
-            stderr=subprocess.STDOUT,
+            conda_install_command, shell=True, stderr=subprocess.STDOUT,
         )
     except subprocess.CalledProcessError as error:
         output = error.output.decode()
@@ -46,10 +46,10 @@ def install_conda_requirements(requirements: List[str] = None, channel: str = No
             non_conda_packages = [
                 package.strip().strip('-').strip()
                 for package in output[
-                               output.index(package_not_found_start): output.index(
-                                   package_not_found_stop
-                               )
-                               ].splitlines()[2:]
+                    output.index(package_not_found_start) : output.index(
+                        package_not_found_stop
+                    )
+                ].splitlines()[2:]
             ]
 
             print(
@@ -77,9 +77,7 @@ def install_conda_requirements(requirements: List[str] = None, channel: str = No
 
     try:
         subprocess.run(
-            conda_install_command,
-            shell=True,
-            stderr=subprocess.DEVNULL,
+            conda_install_command, shell=True, stderr=subprocess.DEVNULL,
         )
     except subprocess.CalledProcessError:
         pass
