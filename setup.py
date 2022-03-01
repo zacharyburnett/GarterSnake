@@ -48,11 +48,10 @@ metadata = config.read_configuration('setup.cfg')['metadata']
 setup(
     **metadata,
     version=__version__,
-    long_description_content_type='text/markdown',
     packages=find_packages(),
     python_requires='>=3.6',
     setup_requires=['dunamai', 'setuptools>=41.2'],
-    install_requires=[],
+    install_requires=None,
     extras_require={
         'testing': ['pytest', 'pytest-cov', 'pytest-xdist', 'wget'],
         'development': ['flake8', 'isort', 'oitnb'],
