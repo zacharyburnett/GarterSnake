@@ -46,7 +46,7 @@ setup(
     url='<package_url>',
     packages=find_packages(),
     python_requires='>=3.6',
-    setup_requires=['dunamai', 'setuptools>=41.2'],
+    setup_requires=['dunamai', 'gartersnake', 'setuptools>=41.2'],
     install_requires=list(REQUIREMENTS),
 )
 ```
