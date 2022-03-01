@@ -1,7 +1,7 @@
 import os
 import subprocess
 import sys
-from typing import Dict, List, Mapping, Union
+from typing import List, Mapping
 
 from gartersnake.dependencies import dependency_tree
 from gartersnake.missing import missing_requirements, read_requirements
