@@ -24,11 +24,11 @@ from gartersnake import install_conda_requirements, \
     install_windows_requirements, is_conda, is_windows, missing_requirements, \
     vcs_version
 
-REQUIREMENTS = {
-    'fiona': ['gdal'],
-    'numpy': [],
-    'requests': [],
-}
+REQUIREMENTS = [
+    'fiona',
+    'numpy',
+    'requests',
+]
 
 MISSING = missing_requirements(REQUIREMENTS)
 if is_conda():
